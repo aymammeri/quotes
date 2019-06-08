@@ -36,28 +36,22 @@ async function getQuotes() {
 // Show new quote
 function newQuote() {
     loading();
-    if (index<apiQuotes.length){
-        const quote = apiQuotes[index]
-        // Check if the author is unknown
-        if(!quote.author){
-            quoteAuthor.textContent = 'Unknown'
-        } else {
-            quoteAuthor.textContent = quote.author;
-        }
-        // Check if the quote has long text
-        if(quote.text.length > 50){
-            quoteText.classList.add('long-quote');
-        } else {
-            quoteText.classList.remove('long-quote');
-        }
-        quoteText.textContent = quote.text;
-        complete();
-        index++;
+    // Get a random quote
+    const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
+    // Check if the author is unknown
+    if(!quote.author){
+        quoteAuthor.textContent = 'Unknown'
     } else {
-        index = 0;
-        getQuotes();
-        
+        quoteAuthor.textContent = quote.author;
     }
+    // Check if the quote has long text
+    if(quote.text.length > 50){
+        quoteText.classList.add('long-quote');
+    } else {
+        quoteText.classList.remove('long-quote');
+    }
+    quoteText.textContent = quote.text;
+    complete();
 }
 
 // Tweet Quote
